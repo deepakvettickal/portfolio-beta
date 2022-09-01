@@ -1,0 +1,87 @@
+$color-gray: #9ca3af;
+$color-black: #1f2937;
+$card-size: 23rem;
+
+* {
+  box-sizing: border-box;
+}
+
+.carousel {
+  position: relative;
+  width: $card-size;
+  height: $card-size;
+  perspective: 500px;
+  transform-style: preserve-3d;
+}
+
+.card-container {
+  position: absolute;
+  width: 28vw;
+  height: 50vh;
+  transform: rotateY(calc(var(--offset) * 50deg))
+    scaleY(calc(1 + var(--abs-offset) * -0.4))
+    translateZ(calc(var(--abs-offset) * -30rem))
+    translateX(calc(var(--direction) * -5rem));
+  filter: blur(calc(var(--abs-offset) * 1rem));
+  transition: all 0.3s ease-out;
+}
+
+.card {
+  width: 75%;
+  height: 75%;
+  padding: 2rem;
+  // background-color: hsl(216deg, 40%, calc(100% - var(--abs-offset) * 50%));
+  // background-color: $color-gray;
+  border-radius: 1px;
+  color: $color-gray;
+  // text-align: justify;
+  justify-content: right;
+  transition: all 0.3s ease-out;
+  // opacity: 0.3;
+  // box-shadow: 3px 5px 7px rgba(0,0,0,0.5);
+  // border: 3px solid white;
+
+  h2 {
+    text-align: right;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 0 0.7em;
+    color: $color-gray;
+  }
+
+  p,
+  h2 {
+    text-align: right;
+    transition: all 0.3s ease-out;
+    opacity: var(--active);
+  }
+  h6 {
+    text-align: right;
+    transition: all 0.3s ease-out;
+    opacity: var(--active);
+  }
+}
+
+.nav {
+  color: grey;
+  font-size: 5rem;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  z-index: 2;
+  cursor: pointer;
+  user-select: none;
+  background: unset;
+  border: unset;
+
+  &.left {
+    transform: translateX(-100%) translatey(-50%);
+  }
+
+  &.right {
+    right: 0;
+    transform: translateX(100%) translatey(-50%);
+  }
+}
