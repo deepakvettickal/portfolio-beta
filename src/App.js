@@ -13,6 +13,7 @@ import Stars from "./Stars.js";
 function App() {
   const [activeMarker, setActiveMarker] = useState(locations["default"]);
   const [order, setOrder] = useState(0);
+  const [zoom, setZoom] = useState(false);
 
   return (
     <>
@@ -32,6 +33,8 @@ function App() {
                   position={[0, 0, 0]}
                   activeMarker={activeMarker}
                   order={order}
+                  zoom={zoom}
+                  setZoom={setZoom}
                 />
               </group>
             </Suspense>
@@ -44,6 +47,7 @@ function App() {
             setActiveMarker={setActiveMarker}
             order={order}
             setOrder={setOrder}
+            setZoom={setZoom}
           >
             {[...new Array(6)].map((_, i) => (
               <Card order={order} />

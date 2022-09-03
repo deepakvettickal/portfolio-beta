@@ -43,11 +43,16 @@ function latLngToVec3(radius, { lat, lng }) {
 }
 
 export function createMarker(location, color) {
-  return (
-    <Marker position={latLngToVec3(radius * 1.02, location)} color={color} />
-  );
+  console.log("locations[mace]--", locations["mace"]);
+  console.log("location", location.key);
+  if (location.lat !== -0.2731 && location.lng !== -34.6756) {
+    return (
+      <Marker position={latLngToVec3(radius * 1.02, location)} color={color} />
+    );
+  } else {
+    return <></>;
+  }
 }
-
 //creates a sphere and sets its position and colour, can be used as <Marker postiion = {} />
 const Marker = ({ position, color }) => {
   return (
@@ -55,7 +60,7 @@ const Marker = ({ position, color }) => {
       <mesh position={position} rotation={[0, 0, 0]}>
         <sphereBufferGeometry
           attach="geometry"
-          args={[radius * 0.02, 16, 16]}
+          args={[radius * 0.008, 16, 16]}
         />
         <meshBasicMaterial attach="material" color={color} />
       </mesh>
