@@ -10,19 +10,18 @@ import { vertexShader, fragmentShader } from "./earthShaders";
 // import earthday from "/earthday.jpg";
 import { createMarker, locations } from "./markers.js";
 
-export default function Earth({ position, activeMarker, order }) {
+const Earth = ({ position, activeMarker, order, zoom, setZoom }) => {
   const mesh = useRef();
 
   const earthDayTexture = useTexture("/earthday.jpg");
   const earthNightTexture = useTexture("/earthnight.jpg");
 
-  //Rotation and zoom
+  // Rotation and zoom
   const latRot = (activeMarker.lat * Math.PI) / 180;
   const lonRot = -((activeMarker.lng * Math.PI) / 180) - Math.PI / 2;
 
-  const [zoom, setZoom] = useState(false);
   const { scale, rotation } = useSpring({
-    scale: zoom ? 1.35 : 1,
+    scale: zoom ? 1.33 : 1,
     rotation: [latRot, lonRot, 0]
   });
 
@@ -34,20 +33,18 @@ export default function Earth({ position, activeMarker, order }) {
     }
   });
 
-  const handleClick = (event) => {
-    if (event.detail === 2) {
-      console.log("double click");
-      setZoom((prev) => !prev);
-    }
-  };
-
+  // const handleClick = (event) => {
+  //   if (event.detail === 2) {
+  //     setZoom((prev) => !prev);
+  //   }
+  // };
   return (
     <>
       <a.group
         dispose={null}
         rotation={rotation}
         scale={scale}
-        onClick={handleClick}
+        // onClick={handleClick}
       >
         <mesh
           position={[0, 0, 0]}
@@ -68,12 +65,13 @@ export default function Earth({ position, activeMarker, order }) {
             fragmentShader={fragmentShader}
           />
           {/* {createMarker(locations["nullIsland"], "white")} */}
-          {createMarker(locations["uob"], "white")}
-          {createMarker(locations["mace"], "white")}
-          {createMarker(locations["iqvia"], "white")}
-          {createMarker(locations["inrix"], "white")}
+          {/* {createMarker(locations["uob"], "white")} */}
+          {createMarker(activeMarker, "red")}
         </mesh>
       </a.group>
     </>
   );
-}
+};
+
+export default Earth;
+// export { scaleAndRot };
