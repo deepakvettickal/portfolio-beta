@@ -29,7 +29,7 @@ const Earth = ({ position, activeMarker, order, zoom, setZoom }) => {
 
   useFrame(() => {
     if (order === 5) {
-      mesh.current.rotation.y -= 0.00035;
+      mesh.current.rotation.y += 0.0004;
     }
   });
 
